@@ -1,0 +1,37 @@
+# ignore files
+/*
+
+# Filesles to tack
+!.gitignore
+!README.markdown
+
+# Folders to track
+!/alacritty
+!/bashrc
+!/bat
+!/caches
+!/distrobox
+!/dunst
+!/foot
+!/git
+!/ghostty
+!/gnupg
+!/gtk-3.0
+!/keyd
+!/lsd
+!/neofetch
+!/neovim
+!/nvim
+!/pass
+!/ranger
+/ranger/colorschemes/*
+!/river
+!/rofi
+!/ssh
+!/starship
+!/swaylock
+!/tbsm
+!/tmux
+!/wallpaper
+!/waybar
+!/zsh

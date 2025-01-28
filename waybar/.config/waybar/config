@@ -1,0 +1,126 @@
+{
+	"layer": "top",
+	"modules-left": ["custom/powermenu", "river/tags", "custom/playerctl"],
+	"modules-center": ["river/window"],
+	"modules-right": [ "battery","backlight","custom/vpn","custom/mega","pulseaudio","custom/mic","custom/cpu","clock", "tray"],
+	"pulseaudio": {
+		"tooltip": false,
+		"scroll-step": 5,
+		"format": "{icon}  {volume}%",
+		"format-muted": "󰝟  0%",
+		"on-click":"amixer -D pulse Master 1+ toggle",
+		"scroll-step": 5,
+		"format-icons": {
+			"default": ["", "󰖀", "󰕾"]
+		}
+	},
+  /* Need to move exec to script and send back tooltop */
+	"custom/powermenu": {
+		"format": "⏻ {}",
+		"interval": "once",
+    "return-type": "json",
+		"exec": "~/.config/waybar/modules/updates.sh",
+		"on-click": "~/.config/waybar/modules/powermenu.sh",
+    "on-click-right":"~/.config/waybar/modules/updates-rofi.sh",
+		"tooltip": true,
+		"signal": 8 
+	},
+
+	"river/tags": {
+		"tag-labels":[
+			"",
+			"2",
+			"3",
+			"4",
+			"5",
+			"6",
+			"7",
+			"8",
+			"9"
+		],
+		"disable-click": false,
+		"num-tags": 9
+	},
+  "custom/playerctl": {
+    "format": "{0} {1}",
+    "return-type": "json",
+    "format-icons": {
+        "Playing": " ",
+        "Paused": " ",
+    },
+    "max-length":30,
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click": "playerctl play-pause",
+    "on-click-middle":"playerctl previous",
+    "on-click-right":"playerctl next"
+	},
+	"temperature": {
+		"hwmon-path-abs": "/sys/class/hwmon",
+		"input-filename": "temp1_input",
+		"format": "{temperatureC}°C ",
+		"on-click": ""
+	},
+	"river/window": {
+		"format": "{}",
+		"max-length": 45
+	},
+	"backlight": {
+		"device": "amdgpu_b10",
+		"format": "{icon}  {}%",
+		"format-icons": ["", ""],
+		"interval": 1,
+		"on-click": ""
+	},
+	"battery": {
+		"interval": 30,
+		"states": {
+			"good": 100,
+			"warning": 30,
+			"critical": 20
+		},
+		"format": "{icon}  {capacity}%",
+		"format-charging": "󰚥 {icon}  {capacity}%",
+		"format-plugged": "󰚥 {icon}  {capacity}%",
+		"format-discharging": "󱐤 {icon}  {capacity}%",
+		"format-alt": "{time} {icon}",
+		"format-icons": ["", "", "", "", ""],
+	},
+	"tray":{
+		"icon-size":16,
+		"show-passive-items":true,
+		"spacing": 10,
+		"reverse-direction": true
+	},
+  "clock": {
+    "timezone": "America/New_York",
+    "interval": 60,
+    "tooltip": true,
+    "format": " {:%H:%M}",
+    "tooltip-format": " {:%Y%m%d-%H:%M}",
+    "format-alt": "{%A, %B, %d, %Y (%R)} "
+  },
+	"custom/cpu": {
+		"interval": 1,
+		"return-type": "string",
+		"exec": "~/.config/waybar/modules/cpu.sh",
+		"tooltip": false,
+		"on-click": ""
+	},
+	"custom/mega": {
+		"interval": 10,
+		"return-type": "string",
+		"exec": "echo  󰔪 ",
+		"exec-if": "pidof megasync",
+		"tooltip": false,
+		"on-click": ""
+	},
+	"custom/vpn": {
+		"interval": 10,
+		"return-type": "string",
+		"exec": "test -d /proc/sys/net/ipv4/conf/*tun0  && echo    || echo   ",
+		"tooltip": false,
+		"on-click": ""
+	},
+}
+}
+/* vim:set ft=json: */

@@ -1,0 +1,11 @@
+rofiopt="Zen\nFirefox\nBrave\nChromium"
+rofi=$(printf "$rofiopt" | rofi -dmenu -i -p "Choose Default Browser")
+[ -z "$rofi" ] && exit
+
+case $rofi in
+	"Brave") xdg-settings set default-web-browser brave-browser.desktop ;;
+	"Chromium") xdg-settings set default-web-browser chromium.desktop ;;
+	"Firefox") xdg-settings set default-web-browser firefox-developer-edition.desktop ;;
+	"Zen") xdg-settings set default-web-browser zen.desktop ;;
+	*)
+esac

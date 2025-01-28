@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# cloudtrail-functions
+
+function cloudtrails() {
+
+  local filters=$(__bma_read_filters $@)
+
+  aws cloudtrail describe-trails --query " \
+    trailList[].[
+      Name, 
+      S3BucketName, 
+      HomeRegion, 
+      join('=', ['IsMultiRegionTrail', to_string(IsMultiRegionTrail)]), 
+      join('=', ['IncludeGlobalServiceEvents', to_string(IncludeGlobalServiceEvents)])
+    ]
+    " \
+    --output text       |
+  grep -E -- "$filters"
+
+}
+

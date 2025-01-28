@@ -1,0 +1,13 @@
+# ghostty config
+# DO NOT comment in line var = this #comment...
+font-size = 24
+theme = nord
+window-decoration = false
+font-family = Fira Code
+# list of fonts tried
+# font-family blank defaults to embeded default font (JetBrains Mono)
+#font-family =
+#font-family = Fira Code #ligs and not bad testing for now.
+#font-family = Consolas # best no ligs no longer supported (license)
+#font-family = DMCA Sans Serif #NOPE 
+#font-family = Source Code Pro # no lig support close

@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+
+# Function to display Rofi menu from JSON
+display_rofi_menu() {
+	local json_file="$1"
+
+	# Check if jq is installed
+	if ! command -v jq &>/dev/null; then
+		echo "Error: jq is required. Please install jq." >&2
+		exit 1
+	fi
+
+	# Check if rofi is installed
+	if ! command -v rofi &>/dev/null; then
+		echo "Error: rofi is required. Please install rofi." >&2
+		exit 1
+	fi
+
+	# Extract menu items based on JSON structure
+	local menu_items
+
+	# Try to handle different JSON structures
+	if jq -e 'type == "array"' "$json_file" &>/dev/null; then
+		# Check if array of objects
+		if jq -e '.[0] | type == "object"' "$json_file" &>/dev/null; then
+			# Extract name and description for objects
+			menu_items=$(jq -r '.[] | "\(.url // "Unnamed") - \(.tags[].name // "")"' "$json_file")
+		else
+			# Simple array of strings or other types
+			menu_items=$(jq -r '.[]' "$json_file")
+		fi
+	else
+		echo "Invalid JSON format. Expecting an array." >&2
+		exit 1
+	fi
+
+	# Display Rofi menu and capture selection
+	local selected
+	selected=$(echo "$menu_items" | rofi -dmenu -i -matching regex -p "Select a bookmark/tag:")
+
+	# Check if a selection was made
+	if [ -n "$selected" ]; then
+		# below only for cli troubleshooting
+		echo "Selected: $selected"
+		URL=$(echo "$selected" | cut -d' ' -f1)
+		xdg-open "$URL"
+
+		# If array of objects, find and display full details of selected item
+		if jq -e '.[0] | type == "object"' "$json_file" &>/dev/null; then
+			NOTIFY=$(jq -r --arg sel "$selected" '.[] | select("\(.url // "Unnamed") - \(.tags[].name // "")" == $sel)' "$json_file")
+			# Only url and tag unless url has '?' then shorten it
+			#NOTIFY_SHORT=$(echo "$selected" | sed 's/\?.*$//')
+			#notify-send "$NOTIFY_SHORT"
+			#NOTIFY_LONG=$(echo "$NOTIFY" | jq '. | .id,.url,.tags')
+			# Notify with id, url and tags (could improve by cleaning url and tags)
+			N_BID=$(echo "$NOTIFY" | jq '. | .id')
+			N_URL=$(echo "$NOTIFY" | jq '. | .url')
+			N_URL=$(echo "$N_URL" | sed 's/\?.*$//')
+			N_TAG=$(echo "$NOTIFY" | jq '. | .tags')
+			notify-send "$N_BID, $N_URL, $N_TAG"
+		fi
+	else
+		echo "No selection made"
+	fi
+}
+
+# Main script
+main() {
+	# Check if a JSON file is provided
+	if [ $# -eq 0 ]; then
+		# Create a default JSON file if no argument is given
+		json_file=$(mktemp --suffix=.json)
+		shiori print --json 2>/dev/null | jq >$json_file
+		display_rofi_menu "$json_file"
+		rm "$json_file"
+	else
+		# Use provided JSON file
+		display_rofi_menu "$1"
+	fi
+}
+
+# Run the main function with arguments
+main "$@"
