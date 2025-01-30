@@ -16,7 +16,7 @@
 1. DONE: sensitve data to sub module; feels buggy...
 1. DONE: ssh-add w pass
 1. DONE: screen sharing
-1. TODO: Generate public dotfile
+1. DONE: Generate [public-dotfiles][public-dotfiles]
 
 ### Move to sub module
 
@@ -43,10 +43,10 @@ git submodule --init --recursive
 
 ## TMUX
 
-- **DONE**: should likely update tmux config back to much coler fugit version.
+- **DONE**: should likely update tmux config back to much cooler fugit version.
 - **DONE**: rv178 is working for now but really should be replaced.
 - **DONE**: powerline weeee
-- [rv178-dotfiles] [rv178-dotfiles]
+- [rv178-dotfiles][rv178-dotfiles]
 
 ## foot
 
@@ -166,14 +166,20 @@ DROP_DIRS="ranger ssh"
 
 ## LINKS
 
-- [github-aj-zoxide] [github-aj-zoxide]
-- [mozilla-webrtc-test-screenshare] [mozilla-webrtc-test-screenshare]
-- [rv178-dotfiles] [rv178-dotfiles]
-- [stack-ssh-add-w-pass] [stack-ssh-add-w-pass]
+- [dotfiles-ansible-stow-public][dotfiles-ansible-stow-public]
+- [github-aj-zoxide][github-aj-zoxide]
+- [mozilla-webrtc-test-screenshare][mozilla-webrtc-test-screenshare]
+- [nerdfont-cheat-sheet][nerdfont-cheat-sheet]
+- [public-dotfiles][public-dotfiles]
+- [rv178-dotfiles][rv178-dotfiles]
+- [stack-ssh-add-w-pass][stack-ssh-add-w-pass]
 
 <!-- Identifiers, in alphabetical order -->
 
+[dotfiles-ansible-stow-public]: https://github.com/fugit/public-dots-ansible-stow
 [github-aj-zoxide]: https://github.com/ajeetdsouza/zoxide
 [mozilla-webrtc-test-screenshare]: https://mozilla.github.io/webrtc-landing/gum_test.html
+[nerdfont-cheat-sheet]: https://www.nerdfonts.com/cheat-sheet
+[public-dotfiles]: https://github.com/fugit/public-dotifiles
 [rv178-dotfiles]: https://github.com/rv178/.dotfiles
 [stack-ssh-add-w-pass]: https://unix.stackexchange.com/questions/585782/how-can-i-have-ssh-add-query-pass-the-password-manager-for-passwords-when-it-a
