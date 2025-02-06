@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Use ps to detect parent process
+# Requires unsetting display in shell if set.
+# DISPLAY= ; pass fugit/name
+if [[ -n "${DISPLAY:-}" ]]; then
+	export PINENTRY_PROGRAM=/usr/bin/pinentry-rofi
+else
+	export PINENTRY_PROGRAM=/usr/bin/pinentry-curses
+fi
+
+# Original gpg command with all arguments
+exec $PINENTRY_PROGRAM "$@"

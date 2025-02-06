@@ -1,9 +1,14 @@
 # ghostty config
 # DO NOT comment in line var = this #comment...
-font-size = 24
-theme = nord
-window-decoration = false
-font-family = Fira Code
+font-size         = 24
+theme             = nord
+window-decoration = auto
+gtk-titlebar      = false
+gtk-adwaita       = false
+font-family       = Fira Code
+# https://ghostty.org/docs/config/reference#window-decoration
+# Seems like we needed all of the above to get app ghostty to show up
+# Still does not work with window-decoration
 # list of fonts tried
 # font-family blank defaults to embeded default font (JetBrains Mono)
 #font-family =

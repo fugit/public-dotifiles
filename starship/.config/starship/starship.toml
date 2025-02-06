@@ -19,8 +19,10 @@ stashed = ' '
 modified = '󱦹'
 #modified = '📝'
 staged = '[++\($count\)](green)'
-renamed = '👅'
-deleted = '🗑'
+#renamed = '👅'
+#renamed = ''
+renamed = '󰑕 '
+deleted = '🗑 '
 
 # Need to figure out date on first line
 [time]

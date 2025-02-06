@@ -38,7 +38,16 @@ export TMPDIR TMP TEMP
 [ -f /usr/bin/nvim ] && alias vi=nvim
 [ -f /usr/bin/bat ] && alias cat=bat
 [ -f /usr/bin/tbsm ] && alias tb1="/usr/bin/tbsm 1"
-
+# disable display for pass command to force curses instead of rofi
+#   Lets see if any other issues POP up.
+#   https://bbs.archlinux.org/viewtopic.php?pid=2204786#p2204786
+[ -f /usr/bin/pinentry-rofi ] && pass() {
+	DR=$DISPLAY
+	unset DISPLAY
+	/usr/bin/pass "$1"
+	export DISPLAY="$DR"
+	#echo "DR$DR"
+}
 ## Steam Games
 ### Death Must Die
 [ -f /usr/bin/steam ] && alias steam-dmd="steam steam://rungameid/2334730"

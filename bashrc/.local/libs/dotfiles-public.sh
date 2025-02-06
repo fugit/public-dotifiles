@@ -12,11 +12,13 @@ tmpdir=$(mktemp -d --tmpdir dotsclean-XXXX)
 echo $tmpdir
 ### END VARS ###
 ### START GIT-ARCHIVE ###
+
 if [ $VERBOSE == "true" ]; then
 	echo "create bare repo or plain files"
 	echo "REMOTE:$REMOTE"
 	echo "git archive --format=tar --remote=$REMOTE master > $tmpdir/dotfiles-clean.tar"
 fi
+
 git archive --format=tar --remote=$REMOTE master >$tmpdir/dotfiles-clean.tar
 cd $tmpdir/ || exit 1
 tar xvf dotfiles-clean.tar || exit 1
@@ -41,6 +43,7 @@ done
 
 ### START CLEANUP ###
 #delete tmpdir
+echo "for now manually uploading"
 echo "rm "$tmpdir""
 #rm $tmpdir
 ### END CLEANUP ###

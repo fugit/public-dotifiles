@@ -35,6 +35,9 @@ riverctl map normal $mod+Shift D spawn "discord --ignore-gpu-blocklist --disable
 
 # Open passmenu requires dmenu-wl
 riverctl map normal $mod+Alt P spawn "$HOME/.config/river/scripts/passmenu"
+#
+# Open Suspend & Powermenu requires dmenu-wl
+riverctl map normal $mod+Shift S spawn "$HOME/.config/waybar/modules/powermenu.sh"
 
 # wl-kbptr keyboard map overlay
 riverctl map normal $mod+Shift M spawn "wl-kbptr"

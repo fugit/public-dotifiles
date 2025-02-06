@@ -24,7 +24,7 @@
 !/nvim
 !/pass
 !/ranger
-/ranger/colorschemes/*
+ranger/.config/ranger/colorschemes/*
 !/river
 !/rofi
 !/ssh
